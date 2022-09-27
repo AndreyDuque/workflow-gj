@@ -1,11 +1,23 @@
-<!-- <a [routerLink]="['/process/process-details/'+process.title]" [queryParams]="{id:process.id}">{{process.title}}</a> -->
-<div class="row bg-light">
-  <div class="col-12 col-md-3 prueba">
-    <img src="https://blog.ida.cl/wp-content/uploads/sites/5/2020/04/tamano-redes-blog-655x470.png" class="img-fluid h-75"alt="">
-
+<!-- <div class="row mt-5 justify-content-evenly"> -->
+  <!-- style="max-width: 480px;" -->
+  <div class="card cartita mb-1 pri  mb-3 position-relative" >
+    <div class=" col-md-4 top-50 start-0 position-absolute translate-middle">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/2000px-Twitter_Verified_Badge.svg.png"
+        class="img-fluid rounded-start">
+    </div>
+    <div class="row g-0 ">
+      
+      <div class="col-md-8">
+        <div class="card-body  ">
+          <a class="card-title titulo fw-bold" [routerLink]="['/process/process-details/'+process.title]"
+            [queryParams]="{id:process.id}">
+            <h5>{{process.title}}</h5>
+          </a>
+          <p class="card-text text-white">{{process.description}}</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-12 col-md-3 ">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi iure nulla a ex qui similique voluptate totam beatae sit nesciunt expedita autem, est assumenda asperiores sint quos vero pariatur dolorum.
-  </div>
-
-</div>
+  
+<!-- </div> -->
