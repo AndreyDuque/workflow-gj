@@ -1,21 +1,19 @@
-<!-- <process-card *ngFor="let process of processes" [process]="process"></process-card> -->
-<body class="body">
-    <section class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-10 ">
-                <div class="ps-5 pt-4 pb-3 w-100 ms-5">
-                    <h6 >PROCESOS</h6>
-                    <h2 >PROCESOS ADMINISTRACIONES GJ</h2>
-                </div>
-                
-                <div class="pb-3 ps-5 w-100 ms-5">
-                    <P >En este espacio podrás ver todos los procesos comprendidos en Administraciones GJ, conjuntamente con los documentos y actividades que se derivan de cada uno de ellos</P>
-                </div>
+<section class="cuerpo container-fluid">
+    <div class="row">
+        <div class="col-12 ">
+            <h5 class="pb-3 pt-2"> PROCESOS </h5>
+            <h2>PROCESOS ADMINISTRACION GJ</h2>
+            <div class="linea">
+
             </div>
-            
+
+            <p>En este espacio podrás ver todos los procesos comprendidos en Administraciones GJ, conjuntamente con los
+                documentos y actividades que se derivan de cada uno de ellos</p>
+
         </div>
-    </section> 
-    
-    <process-card></process-card>
-   
-</body>
+    </div>
+    <div class="row mt-5 justify-content-between  " >
+        <process-card class="col-12 col-md-6 " *ngFor="let process of processes" [process]="process"></process-card>   
+    </div>
+ 
+</section>
