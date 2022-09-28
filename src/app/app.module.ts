@@ -8,17 +8,18 @@ import { MainLayoutComponent } from './modules/core/shared/main-layout/main-layo
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
-    
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })
