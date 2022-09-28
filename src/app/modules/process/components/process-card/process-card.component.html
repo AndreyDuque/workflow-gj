@@ -1,23 +1,19 @@
-<!-- <div class="row mt-5 justify-content-evenly"> -->
-  <!-- style="max-width: 480px;" -->
-  <div class="card cartita mb-1 pri  mb-3 position-relative" >
+
+  <div class="card mb-1 tarjet  mb-3 position-relative h-100 " >
     <div class=" col-md-4 top-50 start-0 position-absolute translate-middle">
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Twitter_Verified_Badge.svg/2000px-Twitter_Verified_Badge.svg.png"
-        class="img-fluid rounded-start">
+        src="https://www.brokable.com/sites/default/files/brokable/Ambiente/Iconos-Extremas.png">
     </div>
     <div class="row g-0 ">
       
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="card-body  ">
-          <a class="card-title titulo fw-bold" [routerLink]="['/process/process-details/'+process.title]"
+          <a class="card-title titleCard fw-bold" [routerLink]="['/process/process-details/'+process.title]"
             [queryParams]="{id:process.id}">
-            <h5>{{process.title}}</h5>
+            <h5 class="ms-5">{{process.title}}</h5>
           </a>
-          <p class="card-text text-white">{{process.description}}</p>
+          <p class="card-text text-white ms-5">{{process.description}}</p>
         </div>
       </div>
     </div>
   </div>
-  
-<!-- </div> -->

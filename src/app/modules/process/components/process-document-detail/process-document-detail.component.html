@@ -1,0 +1,44 @@
+<section class="cuerpo container-fluid">
+
+    <section class="row">
+        <div class="header pt-5 col-12">
+            <h2 class="text-white">TITULO DEL DOCUMENTO</h2>
+            <div class="linea mt-4">
+    
+            </div>
+        </div>
+    </section>
+
+    <section class="row ms-5">
+        <div class="col-12 col-md-6 mt-5 ps-5 ">
+
+            <h1 class="stronge ">OBJETIVOS</h1>
+            <div class="linea mt-4">
+
+            </div>
+            <P class="mt-3">
+                Definir en una forma clara y organizada las actividades que se deben coordinar o ejecutar en la
+                Gestión Administrativa De Copropiedades, de tal forma que se pueda garantizar que el servicio
+                ofrecido por la empresa, cumpla con: las expectativas de los clientes, el alcance dado por la
+                empresa y los requisitos exigidos por la Ley.
+            </P>
+        </div>
+
+    </section>
+    
+    
+    <section class="row adicionLinea mt-5">
+        <div class="col-12 titleTarjet ">
+            <h3 class=" mt-5  text-white">ACTIVIDADES</h3>
+            <div class="lineaWhite mt-4">
+    
+            </div>
+        </div>
+       
+        
+    </section>
+
+    <div class="row mt-5 justify-content-between  " >
+        <process-card class="col-12 col-md-6 " *ngFor="let process of processes" [process]="process"></process-card>   
+    </div>
+
