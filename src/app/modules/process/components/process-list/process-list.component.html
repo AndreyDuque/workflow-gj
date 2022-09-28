@@ -13,7 +13,8 @@
         </div>
     </div>
     <div class="row mt-5 justify-content-between render" >
-        <process-card class="col-12 col-md-6 mt-5" *ngFor="let process of processes" [process]="process"></process-card>   
+        <card class="col-12 col-md-6 mt-5" (event)="userClick($event)" *ngFor="let process of processes" [card]="process"></card>
+        <!-- <process-card class="col-12 col-md-6 mt-5"  [process]="process"></process-card>    -->
     </div>
  
 </section>
