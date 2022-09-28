@@ -19,3 +19,16 @@ h2,p{
     margin-left: 45%;
     margin-bottom: 30px;
 }
+
+.render{
+    margin-left: 10%;
+}
+
+@media only screen and (max-width: 600px) {
+    .render{
+        display: flex;
+        justify-content: center;
+        width:auto;
+    }
+    
+  }

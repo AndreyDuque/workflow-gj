@@ -6,6 +6,8 @@ import { ProcessLayoutComponent } from './components/process-layout/process-layo
 import { ProcessCardComponent } from './components/process-card/process-card.component';
 import { ProcessListComponent } from './components/process-list/process-list.component';
 import { ProcessDetailsComponent } from './components/process-details/process-details.component';
+import { ProcessDocumentDetailComponent } from './components/process-document-detail/process-document-detail.component';
+import { ProcessActivityDetailComponent } from './components/process-activity-detail/process-activity-detail.component';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { ProcessDetailsComponent } from './components/process-details/process-de
     ProcessLayoutComponent,
     ProcessCardComponent,
     ProcessListComponent,
-    ProcessDetailsComponent
+    ProcessDetailsComponent,
+    ProcessDocumentDetailComponent,
+    ProcessActivityDetailComponent
   ],
   imports: [
     CommonModule,

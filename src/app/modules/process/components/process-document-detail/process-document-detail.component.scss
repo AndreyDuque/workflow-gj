@@ -1,35 +1,37 @@
-.body{
+.cuerpo{
     background-image: url('https://cdn.bitrix24.site/bitrix/images/landing/krayt/artificial_intelligence/0.jpg');
     background-attachment: fixed;
 }
 
 .header{
-    background-color: #14112c;
+    background-color:  #14112c;
     padding-left: 9%;
     height: 180px;
 }
 
-.boton{
+.titleTarjet{
+    background-color:  #6AB8EEE6;
+    padding-left: 8%;
+    height: 140px;
+}
+
+.linea{
     background-color: #6AB8EEE6;
     width: 8%;
     height: 10px;
 }
 
-.documentTitle{
+.adicionLinea{
     background-color: #6AB8EEE6;
-    height: 100px;
+    height: 150px;
+    
 }
 
-.titleCardDocument{
-    color: #007bff;
-}
-
-.tarjeta{
-    background-color:  transparent;
-    border:  0px solid !important;
-}
-
-a{
-    text-decoration: none;
+.lineaWhite{
+    background-color: white;
+    width: 6%;
+    height: 12px;
+    margin-bottom: 20%;
+    
 }
 

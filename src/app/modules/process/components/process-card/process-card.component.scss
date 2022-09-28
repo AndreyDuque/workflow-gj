@@ -1,7 +1,11 @@
-.pri{
+.tarjet{
     background-color:  #1d1a37 ;
+    width: 80%;
+   
+
+    
 }
-.titulo{
+.titleCard{
     color: #007bff;
 }
 
@@ -12,8 +16,20 @@ a{
 img{
     width: 60%;
     height: 60%;
-    margin-top: 20%;
-    margin-left: 10%;
-   
+    margin-top: 10%;
+    margin-left: 25%;
 }
 
+
+img:hover{
+    filter: opacity(.5);
+}
+
+
+@media only screen and (max-width: 600px) {
+   
+    img{
+        width: 40%;
+        margin-left: 35%;
+    }
+  }
