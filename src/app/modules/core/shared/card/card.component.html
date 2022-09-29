@@ -1,19 +1,28 @@
-
-  <div class="card mb-1 mb-3 position-relative h-100 " [ngClass]="card.type==='process'?'tarjet': 'd-none'" >
-    <div class=" col-md-4 top-50 start-0 position-absolute translate-middle">
-      <img
-        src="https://www.brokable.com/sites/default/files/brokable/Ambiente/Iconos-Extremas.png">
-    </div>
-    <div class="row g-0 ">
-      
-      <div class="col-md-12">
-        <div class="card-body  ">
-          <a class="card-title titleCard fw-bold">
-            <h5 class="ms-5"(click)="userClick(card.id,card.type)">{{card.title}}</h5>
-          </a>
-          <p class="card-text text-white ms-5">{{card.description}}</p>
-        </div>
+<div
+  class="card mb-1 mb-3 position-relative h-100"
+  [ngClass]="card.type === 'process' ? 'tarjet' : 'd-none'"
+>
+  <div class="col-md-4 top-50 start-0 position-absolute translate-middle">
+    <img
+      src="https://www.brokable.com/sites/default/files/brokable/Ambiente/Iconos-Extremas.png"
+    />
+  </div>
+  <div class="row g-0">
+    <div class="col-md-12">
+      <div class="card-body">
+        <a [attr.role]="'button'" class="card-title titleCard fw-bold">
+          <h5 class="ms-5" (click)="userClick(card.id, card.type)">
+            {{ card.title }}
+          </h5>
+        </a>
+        <p class="card-text text-white ms-5">
+          {{
+            !card.description
+              ? "Este proceso aun no tiene un objetivo definido"
+              : (card.description.length > 200? (card.description | slice:0:150) + ' ...': card.description)
+          }}
+        </p>
       </div>
     </div>
   </div>
-
+</div>
