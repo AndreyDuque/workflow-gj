@@ -28,7 +28,7 @@ const routes: Routes = [
       component:ProcessActivityDetailComponent
     },
     {
-      path:'process-document-detail',
+      path:'document-detail/:title',
       component:ProcessDocumentDetailComponent
     }
 ]}
