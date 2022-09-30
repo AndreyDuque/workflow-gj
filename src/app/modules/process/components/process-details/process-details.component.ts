@@ -16,6 +16,9 @@ export class ProcessDetailsComponent implements OnInit {
   idProcess: number = 0;
   title: string = "";
   documents: any[] = [];
+  otherDocuments: any[] = [];
+  otherLeakedDocuments: any[] = [];
+  fieldsOtherDocuments: any[] = [];
 
   constructor(
     private readonly b24: B24Service,
@@ -38,9 +41,24 @@ export class ProcessDetailsComponent implements OnInit {
 
     this.getProcessDetails()
 
-    while (this.documents.length < 4) {
-      this.documents.push({ title: 'Titulo documento', description: 'Descripccion documento', id: this.documents.length+1, type: "process" });
-    }
+    const select = [
+      "id",
+      "title",
+      "ufCrm30_1637611597722"
+    ]
+
+    this.b24.spaFieldContent(146, select).subscribe({
+      'next': (documents: any) => {
+        const getDocuments = documents.result.items;
+        getDocuments.forEach((getDocuments: any) => {
+          this.documents.push({ title: getDocuments.title, description: getDocuments.ufCrm30_1637611597722, id: getDocuments.id, type: "process" });
+        });
+        console.log('Resultado Listar SPA: ', getDocuments);
+      },
+      'error': docucuments => console.log('Error Listar SPA: ', docucuments),
+    })
+
+    this.getOtherDocuments();
   }
 
   getProcessDetails() {
@@ -48,6 +66,7 @@ export class ProcessDetailsComponent implements OnInit {
       'next': (processDetalis: any) => {
         this.processDetalis = processDetalis.result.item;
         this.idCharges = this.processDetalis.ufCrm28_1637610817068;
+        console.log('ID-Cargos:', this.processDetalis)
         this.getLeakedCharges();
       },
       'error': processDetalis => console.log(processDetalis)
@@ -60,16 +79,65 @@ export class ProcessDetailsComponent implements OnInit {
         let chargesLoad: any = [];
         chargesLoad = fieldsProcess.result.fields.ufCrm28_1637610817068.items;
         this.idCharges.forEach((element) => {
-          this.charges.push(chargesLoad.filter((chargeLoad:any) => chargeLoad.ID == element)[0].VALUE);
+          this.charges.push(chargesLoad.filter((chargeLoad: any) => chargeLoad.ID == element)[0].VALUE);
         });
       },
       'error': fieldsProcess => console.log(fieldsProcess)
     })
   }
 
+  getOtherDocuments() {
+    const select = [
+      "id",
+      "title"
+    ]
+
+    this.b24.spaFieldContent(189, select).subscribe({
+      'next': (otherDocuments: any) => {
+        this.otherDocuments = otherDocuments.result.items;
+        this.otherDocuments.forEach(otherDocument => {
+          this.fieldsOtherDocuments.push(
+            {
+              id: otherDocument.id,
+              name: otherDocument.title,
+              type: otherDocument.ufCrm32_1638059703935,
+              fileLocation: otherDocument.ufCrm32_1638059743150,
+              activeFileTime: otherDocument.ufCrm32_1638059755949,
+              inactiveFileLocation: otherDocument.ufCrm32_1638059774800,
+              idleFileTime: otherDocument.ufCrm32_1638059791256,
+              finalDispositions: otherDocument.ufCrm32_1638059827591,
+              charge: otherDocument.ufCrm32_1638060427910
+            }
+          )
+        });
+        this.updateFieldsOtherDocuments();
+      },
+      'error': otherDocuments => console.log('Error Listar SPA: ', otherDocuments),
+    })
+  }
+
+  updateFieldsOtherDocuments() {
+    this.b24.spaFieldsForId(189).subscribe({
+      'next': (fieldsOtherDocuments: any) => {
+        let fieldsLoad: any = [];
+        fieldsLoad = fieldsOtherDocuments.result.fields;
+        console.log('Campos de otros documentos: ', fieldsLoad);
+        this.fieldsOtherDocuments.forEach((fieldOtherDocument) => {
+          let types = fieldsLoad.ufCrm32_1638059703935.items;
+          let finalDispositions = fieldsLoad.ufCrm32_1638059827591.items;
+          let charges = fieldsLoad.ufCrm32_1638060427910.items;
+          fieldOtherDocument.type = types.filter((type: any) => type.ID == fieldOtherDocument.type)[0].VALUE;
+          fieldOtherDocument.finalDispositions = finalDispositions.filter((finalDisposition: any) => finalDisposition.ID == fieldOtherDocument.finalDispositions)[0].VALUE;
+          fieldOtherDocument.charge = charges.filter((charge: any) => charge.ID == fieldOtherDocument.charge)[0].VALUE;
+        });
+      },
+      'error': fieldsOtherDocuments => console.log(fieldsOtherDocuments)
+    })
+  }
+
   userClick(e: any) {
     const documents = this.documents.filter(document => document.id === e.id)[0];
-    this.router.navigate([`/process/document-detail/${documents.title}`], {queryParams: {id:e.id}});
+    this.router.navigate([`/process/document-detail/${documents.title}`], { queryParams: { id: e.id } });
     console.log(e)
   }
 
