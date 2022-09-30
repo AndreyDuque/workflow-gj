@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import {HttpClientModule} from "@angular/common/http";
 import {B24Service} from "./services/b24.service";
 import { CardComponent } from './shared/card/card.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 
 @NgModule({
   declarations: [
-    CardComponent
+    CardComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,55 @@
+<section class="cuerpo container-fluid">
+    <div class="row">
+        <div class="col-12 ">
+            <h5 class="pb-3 pt-2"> Nombre del cargo </h5>
+            <h2> PROCESOS DE (NOMBRE DEL CARGO)</h2>
+            <div class="linea">
+
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <p>En este espacio podrás ver todos los procesos comprendidos en Administraciones GJ, conjuntamente con
+                    los
+                    Administraciones GJ, relacionadas con el cargo de (NOMBRE DEL CARGO)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 justify-content-between render">
+        <card class="col-12 col-md-6 mt-5" (event)="userClick($event)" *ngFor="let process of processesCharge"
+            [card]="process"></card>
+    </div>
+
+    <section class="mt-5">
+        <div class="row">
+            <div class="col-12 mt-5">
+                <h5>Nombre del cargo</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>ACTIVIDADES DE (NOMBRE DE CARGO)</h2>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-12 linea">
+
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <p>En este espacio podrás ver todas las actividades comprendidas en Administraciones GJ, conjuntamente
+                    asociadas
+                    al cargo (NOMBRE DEL CARGO)</p>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="row mt-2 justify-content-between render">
+        <card class="col-12 col-md-6 mt-5" (event)="userClick($event)" *ngFor="let process of processesCharge"
+            [card]="process"></card>
+    </div>
+</section>

@@ -1,0 +1,15 @@
+img:hover{
+    filter: opacity(.5);
+}
+
+//media query
+@media only screen and (max-width: 600px) {
+
+.cargos{
+    width: auto;
+    margin-left: 12%;
+}
+.card{
+    margin-top: 10%;
+}
+}
