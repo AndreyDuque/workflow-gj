@@ -18,7 +18,7 @@
         <p class="card-text text-white ms-5">
           {{
             !card.description
-              ? "Este proceso aun no tiene un objetivo definido"
+              ? "No existe un objetivo definido"
               : (card.description.length > 200? (card.description | slice:0:150) + ' ...': card.description)
           }}
         </p>
