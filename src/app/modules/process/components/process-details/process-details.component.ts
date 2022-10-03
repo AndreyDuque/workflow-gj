@@ -83,7 +83,7 @@ export class ProcessDetailsComponent implements OnInit {
           this.charges.push(chargesLoad.filter((chargeLoad: any) => chargeLoad.ID == element)[0].VALUE);
         });
       },
-      'error': fieldsProcess => console.log(fieldsProcess)
+      'error': error => console.log(error)
     })
   }
 
@@ -113,7 +113,7 @@ export class ProcessDetailsComponent implements OnInit {
         });
         this.updateFieldsOtherDocuments();
       },
-      'error': otherDocuments => console.log('Error Listar SPA: ', otherDocuments),
+      'error': error => console.log('Error Listar SPA: ', error),
     })
   }
 
@@ -132,7 +132,7 @@ export class ProcessDetailsComponent implements OnInit {
           fieldOtherDocument.charge = charges.filter((charge: any) => charge.ID == fieldOtherDocument.charge)[0].VALUE;
         });
       },
-      'error': fieldsOtherDocuments => console.log(fieldsOtherDocuments)
+      'error': error => console.log(error)
     })
   }
 
@@ -142,24 +142,23 @@ export class ProcessDetailsComponent implements OnInit {
     console.log(e)
   }
 
-  exportCSV(){
-
-
+  exportCSV(fieldOtherDocument: any){
     const options = {
       fieldSeparator: ',',
       quoteStrings: '"',
       decimalSeparator: '.',
       showLabels: true,
       showTitle: true,
-      title: `${this.title}`,
+      title: `${fieldOtherDocument.name}`,
       useTextFile: false,
       useBom: true,
       useKeysAsHeaders: true,
-      // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+      headers: ['Tipo', 'Ubicación archivo activo']
+      // <-- Won't work with useKeysAsHeaders present!
     };
 
     const csvExporter = new ExportToCsv(options);
-    csvExporter.generateCsv([this.processDetails]);
+    csvExporter.generateCsv([fieldOtherDocument]);
   }
 
 }
