@@ -18,13 +18,15 @@
       <div class="col-12 col-md-5 mt-5">
         <h1 class="stronge">PROCESOS</h1>
         <div class="linea mt-4"></div>
-        <p class="mt-3">{{ documentDetalis.ufCrm30_1655843438 }}</p>
+        <div *ngFor="let process of documentDetalis.ufCrm30_1655843438">
+          <li *ngIf="documentDetalis.ufCrm30_1655843438" class="mt-3">{{ process.title }}</li>
+        </div>
       </div>
 
       <div class="col-12 col-md-5 mt-5">
         <h1 class="stronge">CARGO</h1>
         <div class="linea mt-4"></div>
-        <p class="mt-3">{{ documentDetalis.ufCrm30_1638060318453 }}</p>
+        <p *ngIf="documentDetalis.ufCrm30_1638060318453" class="mt-3">{{ documentDetalis.ufCrm30_1638060318453.VALUE }}</p>
       </div>
     </div>
   </section>
