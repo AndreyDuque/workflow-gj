@@ -73,10 +73,10 @@
           <p><strong>DISPOSICIÓN FINAL:</strong> {{ fieldOtherDocument.finalDispositions }}</p>
           <P><strong>CARGO:</strong> {{ fieldOtherDocument.charge }}</P>
         </div>
+        <div class="mt-4">
+          <a class="btn btn-outline-primary col-auto" [attr.role]="'button'" (click)="exportCSV(fieldOtherDocument)">Exportar CSV</a>
+        </div>
       </div>
     </div>
   </section>
 </main>
-<div class="bg-light row d-flex justify-content-center">
-  <a class="btn btn-success col-auto" [attr.role]="'button'" (click)="exportCSV()">Exportar CSV</a>
-</div>
