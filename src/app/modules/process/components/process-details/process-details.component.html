@@ -11,7 +11,7 @@
       <div class="col-12 col-md-5 mt-5">
         <h2>OBJETIVOS</h2>
         <div class="boton mt-4"></div>
-        <p class="mt-3">{{ processDetalis.ufCrm28_1637610739213 }}</p>
+        <p class="mt-3">{{ processDetails.ufCrm28_1637610739213 }}</p>
       </div>
 
       <div class="col-12 col-md-5 mt-5">
@@ -22,19 +22,19 @@
       <div class="col-12 col-md-5 mt-5">
         <h2>REQUISITOS</h2>
         <div class="boton mt-4"></div>
-        <p class="mt-3">{{ processDetalis.ufCrm28_1637610845894 }}</p>
+        <p class="mt-3">{{ processDetails.ufCrm28_1637610845894 }}</p>
       </div>
 
       <div class="col-12 col-md-5 mt-5">
         <h2>INDICADORES</h2>
         <div class="boton mt-4"></div>
-        <p class="mt-3">{{ processDetalis.ufCrm28_1637610863150 }}</p>
+        <p class="mt-3">{{ processDetails.ufCrm28_1637610863150 }}</p>
       </div>
 
       <div class="col-12 col-md-5 mt-5">
         <h2>RIESGOS</h2>
         <div class="boton mt-4"></div>
-        <p class="mt-3">{{ processDetalis.ufCrm28_1637610892801 }}</p>
+        <p class="mt-3">{{ processDetails.ufCrm28_1637610892801 }}</p>
       </div>
     </div>
   </section>
@@ -77,3 +77,6 @@
     </div>
   </section>
 </main>
+<div class="bg-light row d-flex justify-content-center">
+  <a class="btn btn-success col-auto" [attr.role]="'button'" (click)="exportCSV()">Exportar CSV</a>
+</div>

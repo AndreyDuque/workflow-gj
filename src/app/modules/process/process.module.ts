@@ -23,7 +23,6 @@ import { CoreModule } from '../core/core.module';
     CommonModule,
     ProcessRoutingModule,
     CoreModule
-    
   ]
 })
 export class ProcessModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { B24Service } from 'src/app/modules/core/services/b24.service';
+import { ExportToCsv } from 'export-to-csv';
 
 @Component({
   selector: 'app-process-details',
@@ -10,7 +11,7 @@ import { B24Service } from 'src/app/modules/core/services/b24.service';
 
 export class ProcessDetailsComponent implements OnInit {
 
-  processDetalis: any = {};
+  processDetails: any = {};
   charges: any[] = [];
   idCharges: any[] = [];
   idProcess: number = 0;
@@ -55,7 +56,7 @@ export class ProcessDetailsComponent implements OnInit {
         });
         console.log('Resultado Listar SPA: ', getDocuments);
       },
-      'error': docucuments => console.log('Error Listar SPA: ', docucuments),
+      'error': error => console.log('Error Listar SPA: ', error),
     })
 
     this.getOtherDocuments();
@@ -63,13 +64,13 @@ export class ProcessDetailsComponent implements OnInit {
 
   getProcessDetails() {
     this.b24.spaFieldList(183, this.idProcess).subscribe({
-      'next': (processDetalis: any) => {
-        this.processDetalis = processDetalis.result.item;
-        this.idCharges = this.processDetalis.ufCrm28_1637610817068;
-        console.log('ID-Cargos:', this.processDetalis)
+      'next': (processDetails: any) => {
+        this.processDetails = processDetails.result.item;
+        this.idCharges = this.processDetails.ufCrm28_1637610817068;
+        console.log('ID-Cargos:', this.processDetails)
         this.getLeakedCharges();
       },
-      'error': processDetalis => console.log(processDetalis)
+      'error': error => console.log(error)
     })
   }
 
@@ -137,9 +138,28 @@ export class ProcessDetailsComponent implements OnInit {
 
   userClick(e: any) {
     const documents = this.documents.filter(document => document.id === e.id)[0];
-    this.router.navigate([`/process/document-detail/${documents.title}`], { queryParams: { id: e.id } });
+    this.router.navigate([`/process/document-detail/${documents.title}`], { queryParams: { id: e.id } }).then();
     console.log(e)
   }
 
-}
+  exportCSV(){
 
+
+    const options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalSeparator: '.',
+      showLabels: true,
+      showTitle: true,
+      title: `${this.title}`,
+      useTextFile: false,
+      useBom: true,
+      useKeysAsHeaders: true,
+      // headers: ['Column 1', 'Column 2', etc...] <-- Won't work with useKeysAsHeaders present!
+    };
+
+    const csvExporter = new ExportToCsv(options);
+    csvExporter.generateCsv([this.processDetails]);
+  }
+
+}
