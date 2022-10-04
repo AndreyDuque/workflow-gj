@@ -38,7 +38,14 @@
     </div>
   </section>
 
-  <div class="row mt-5 justify-content-between">
-    <h4>aca van renderizadas las tarjetas</h4>
-  </div>
+  <section class="container">
+    <div class="row mb-5 justify-content-between render">
+      <card
+        class="col-12 col-md-6 mt-5"
+        (event)="userClick($event)"
+        *ngFor="let activity of updateActivities"
+        [card]="activity"
+      ></card>
+    </div>
+  </section>
 </section>
