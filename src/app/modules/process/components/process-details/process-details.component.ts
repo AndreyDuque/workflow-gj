@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { B24Service } from 'src/app/modules/core/services/b24.service';
-import { ExportToCsv } from 'export-to-csv';
+import { utils, writeFileXLSX } from 'xlsx';
 
 @Component({
   selector: 'app-process-details',
@@ -142,23 +142,11 @@ export class ProcessDetailsComponent implements OnInit {
     console.log(e)
   }
 
-  exportCSV(fieldOtherDocument: any){
-    const options = {
-      fieldSeparator: ',',
-      quoteStrings: '"',
-      decimalSeparator: '.',
-      showLabels: true,
-      showTitle: true,
-      title: `${fieldOtherDocument.name}`,
-      useTextFile: false,
-      useBom: true,
-      useKeysAsHeaders: true,
-      headers: ['Tipo', 'Ubicación archivo activo']
-      // <-- Won't work with useKeysAsHeaders present!
-    };
-
-    const csvExporter = new ExportToCsv(options);
-    csvExporter.generateCsv([fieldOtherDocument]);
+  exportExcel(fieldOtherDocument: any){
+    const ws = utils.json_to_sheet([fieldOtherDocument]);
+    const wb = utils.book_new();
+    utils.book_append_sheet(wb, ws, "Data");
+    writeFileXLSX(wb, `${fieldOtherDocument.name}.xlsx`);
   }
 
 }
