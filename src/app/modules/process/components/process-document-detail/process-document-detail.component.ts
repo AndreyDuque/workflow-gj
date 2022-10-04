@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { B24Service } from 'src/app/modules/core/services/b24.service';
 
 @Component({
@@ -10,22 +11,33 @@ export class ProcessDocumentDetailComponent implements OnInit {
 
   processes: any[] = [];
   documentDetalis: any = {};
+  idDocument: number = 0;
+  processesValues: any[] = [];
+  activities: any[] = [];
+  updateActivities: any[] = [];
 
   constructor(
-    private readonly b24: B24Service
+    private readonly b24: B24Service,
+    private readonly route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe({
+      'next': query => {
+        this.idDocument = Number(query['id']);
+      }
+    })
     this.getDocumentDetails();
   }
 
   getDocumentDetails() {
-    this.b24.spaFieldList(146, 12).subscribe({
+    this.b24.spaFieldList(146, this.idDocument).subscribe({
       'next': (documentDetalis: any) => {
         this.documentDetalis = documentDetalis.result.item;
         console.log('Detalles del documento:', this.documentDetalis);
         this.updateChargeFields();
         this.updateProcessesFields();
+        this.updateActivitiesFields();
       },
       'error': error => console.log(error)
     })
@@ -46,36 +58,56 @@ export class ProcessDocumentDetailComponent implements OnInit {
   }
 
   updateProcessesFields() {
-    const select = {
-      select: [
-        "id",
-        "title"
-      ]
-    }
+    const idsProcess = this.documentDetalis.ufCrm30_1655843438;
 
-    const filter = {
-      filter: {
-        logic:"OR",
-        0:{
-              id:22
-        },
-        1:{
-              id:20
-        },
-        2:{
-              id:18
+    idsProcess.forEach((idProcess: any) => {
+      const select = {
+        select: [
+          "id",
+          "title"
+        ]
+      }
+
+      const filter = {
+        filter: {
+          id: idProcess
         }
-    }
-    }
+      }
 
-    this.b24.spaFieldContent(183, select, filter).subscribe({
-      'next': (documents: any) => {
-        const getDocuments = documents.result.items;
-        this.documentDetalis.ufCrm30_1655843438 = getDocuments;
-        console.log('Resultado procesos filtrados: ', getDocuments);
-      },
-      'error': error => console.log('Error Listar SPA: ', error),
-    })
+      this.b24.spaFieldContent(183, select, filter).subscribe({
+        'next': (documents: any) => {
+          const getDocuments = documents.result.items;
+          this.processesValues.push(getDocuments[0]);
+          this.documentDetalis.ufCrm30_1655843438 = this.processesValues;
+        },
+        'error': error => console.log('Error Listar SPA: ', error),
+      })
+    });
+
+  }
+
+  updateActivitiesFields() {
+    const activities = this.documentDetalis.ufCrm30_1637611958;
+    activities.forEach((activity: any) => {
+      this.b24.spaFieldList(150, activity).subscribe({
+        'next': (activity: any) => {
+          const cardActivity = {
+            id: activity.result.item.id,
+            title: activity.result.item.title,
+            description: activity.result.item.ufCrm42_1656011791080,
+            type: "process"
+          }
+          this.updateActivities.push(cardActivity);
+        },
+        'error': error => console.log('Error Listar SPA: ', error)
+      })
+    });
+  }
+
+  userClick(e: any) {
+    // const documents = this.documents.filter(document => document.id === e.id)[0];
+    // this.router.navigate([`/process/document-detail/${documents.title}`], { queryParams: { id: e.id } }).then();
+    // console.log(e)
   }
 
 }
