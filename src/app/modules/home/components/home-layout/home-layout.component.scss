@@ -1,0 +1,56 @@
+body{
+    background-image: url('https://cdn.bitrix24.site/bitrix/images/landing/krayt/artificial_intelligence/0.jpg');
+}
+
+header{
+    background-color: #68b6ee;
+    height: 100px;
+    display: flex;
+    align-items: center;
+ 
+}
+
+.botoncito{
+    width: 70px;
+    height: 10px;
+    background-color: white;
+    margin-left: 8%;
+    
+}
+
+
+.banner{
+    background-image: url('https://cdn.bitrix24.site/bitrix/images/landing/business/1920x800/img1.jpg');
+    background-position: top center;
+    background-size: cover;
+    padding: 5% 35% 20% 5%;
+}
+
+.textBanner{
+    color: black;
+    width: 100%;
+    margin-left: 50%;
+}
+
+.procesos{
+    background-color: #14112c;
+    height: 250px;
+    text-align: left;
+}  
+
+a{
+    text-decoration: none;
+}
+  
+.botoncito2{
+    width: 70px;
+    height: 10px;
+    background-color:#68b6ee;
+    margin-left: 8%; 
+}
+
+a:hover{
+
+    color: #68b6ee !important;
+    
+}

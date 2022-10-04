@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  webHockUrl: 'https://grupogj.bitrix24.es/rest/398/otsiwb32tsget9ju'
 };
 
 /*

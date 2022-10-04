@@ -1,0 +1,47 @@
+.tarjet{
+    background-color:  #1d1a37 ;
+    width: 80%;
+    color: white;
+}
+
+.titleCard{
+    color: #007bff;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    width: 60%;
+    height: 60%;
+    margin-top: 10%;
+    margin-left: 25%;
+    margin-bottom: 35%;
+}
+
+
+img:hover{
+    filter: opacity(.5);
+}
+
+.tarjetDocument{
+    background-color: transparent;
+    border: 0px;
+    margin-left: 8%;
+    color: black;
+
+}
+
+.card-height{
+  min-height: 150px;
+}
+
+@media only screen and (max-width: 600px) {
+
+    img{
+        width: 40%;
+        margin-left: 32%;
+        margin-bottom: 15%;
+    }
+  }

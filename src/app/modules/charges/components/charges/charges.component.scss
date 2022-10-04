@@ -1,0 +1,32 @@
+.body {
+  background-image: url("https://cdn.bitrix24.site/bitrix/images/landing/krayt/artificial_intelligence/0.jpg");
+  background-attachment: fixed;
+}
+
+.colorTitulo {
+  color: #6ab8eee6;
+  font-weight: bold;
+}
+.linea {
+  background-color: #6ab8eee6;
+  height: 10px;
+  width: 8%;
+  margin-left: 45%;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+img:hover {
+  filter: opacity(0.5);
+}
+
+//media query
+@media only screen and (max-width: 600px) {
+  .cargos {
+    width: auto;
+    margin-left: 9%;
+  }
+  .card {
+    margin-top: 10%;
+  }
+}

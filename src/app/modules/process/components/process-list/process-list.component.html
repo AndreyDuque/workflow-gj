@@ -1,0 +1,19 @@
+<section class="cuerpo container-fluid mx-0">
+    <div class="row py-5">
+        <div class="col-12 ">
+            <h5 class="pb-3 pt-2"> PROCESOS </h5>
+            <h2>PROCESOS ADMINISTRACION GJ</h2>
+            <div class="linea">
+
+            </div>
+
+            <p>En este espacio podrás ver todos los procesos comprendidos en Administraciones GJ, conjuntamente con los
+                documentos y actividades que se derivan de cada uno de ellos</p>
+
+        </div>
+    </div>
+    <div class="row py-5 justify-content-between render " >
+        <card class="col-12 col-md-6 mt-5" (event)="userClick($event)" *ngFor="let process of processes" [card]="process"></card>
+    </div>
+
+</section>
