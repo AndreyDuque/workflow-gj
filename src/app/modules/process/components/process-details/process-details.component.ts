@@ -4,7 +4,7 @@ import { B24Service } from 'src/app/modules/core/services/b24.service';
 import { utils, writeFileXLSX } from 'xlsx';
 
 @Component({
-  selector: 'app-process-details',
+  selector: 'process-details',
   templateUrl: './process-details.component.html',
   styleUrls: ['./process-details.component.scss']
 })
