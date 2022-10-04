@@ -1,6 +1,6 @@
 .tarjet{
     background-color:  #1d1a37 ;
-    width: 80%; 
+    width: 80%;
     color: white;
 }
 
@@ -30,11 +30,15 @@ img:hover{
     border: 0px;
     margin-left: 8%;
     color: black;
-    
+
+}
+
+.card-height{
+  min-height: 150px;
 }
 
 @media only screen and (max-width: 600px) {
-   
+
     img{
         width: 40%;
         margin-left: 32%;

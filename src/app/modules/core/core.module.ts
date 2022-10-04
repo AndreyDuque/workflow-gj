@@ -14,13 +14,14 @@ import { FooterComponent } from './shared/footer/footer.component';
   imports: [
     CommonModule,
     HttpClientModule
-   
+
   ],
   providers: [
     B24Service
   ],
   exports: [
-    CardComponent
+    CardComponent,
+    FooterComponent
   ]
 })
 export class CoreModule { }
