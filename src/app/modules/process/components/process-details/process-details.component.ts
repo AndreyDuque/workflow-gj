@@ -52,7 +52,7 @@ export class ProcessDetailsComponent implements OnInit {
       'next': (documents: any) => {
         const getDocuments = documents.result.items;
         getDocuments.forEach((getDocuments: any) => {
-          this.documents.push({ title: getDocuments.title, description: getDocuments.ufCrm30_1637611597722, id: getDocuments.id, type: "process" });
+          this.documents.push({ title: getDocuments.title, description: getDocuments.ufCrm30_1637611597722, id: getDocuments.id, type: "documents" });
         });
         console.log('Resultado Listar SPA: ', getDocuments);
       },
