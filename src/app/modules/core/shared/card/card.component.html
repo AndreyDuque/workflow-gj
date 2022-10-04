@@ -1,6 +1,6 @@
 <div
   class="card mb-1 mb-3 position-relative h-100"
-  [ngClass]="card.type === 'process' ? 'tarjet' : 'd-none'"
+  [ngClass]="card.type === 'process' ? 'tarjet' : 'tarjetDocument'"
 >
   <div class="col-md-4 top-50 start-0 position-absolute translate-middle">
     <img
@@ -15,7 +15,7 @@
             {{ card.title }}
           </h5>
         </a>
-        <p class="card-text text-white ms-5">
+        <p class="card-text  ms-5">
           {{
             !card.description
               ? "No existe un objetivo definido"
