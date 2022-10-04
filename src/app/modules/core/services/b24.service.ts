@@ -25,8 +25,17 @@ private readonly webHockUrl= environment.webHockUrl;
     return this.http.get(`${this.webHockUrl}/crm.item.get?entityTypeId=${entityTypeId}&id=${id}`);
   }
 
-  spaFieldContent(entityTypeId: number, select: any){
-    return this.http.post(`${this.webHockUrl}/crm.item.list?entityTypeId=${entityTypeId}`, select);
+  spaFieldContent(entityTypeId: number, select: any, filter?: any){
+    let body = {};
+    if (filter) {
+      body = {
+        ...select,
+        ...filter
+      }
+    }else {
+      body = {...select}
+    }
+    return this.http.post(`${this.webHockUrl}/crm.item.list?entityTypeId=${entityTypeId}`, body);
   }
 
 }

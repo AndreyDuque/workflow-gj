@@ -18,7 +18,7 @@ const routes: Routes = [
     component:ChargesComponent
   },
   {
-    path:'process-list',
+    path:'process-list/:title',
     component:ListProcessChargesComponent
   }]
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'card-charge',
@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardChargeComponent implements OnInit {
 
+  @Input() cardCharge!: any;
+  @Output() event:EventEmitter<any>= new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+
+  }
+
+  userClick(id:any){
+    this.event.emit({
+      id
+    })
   }
 
 }
