@@ -103,7 +103,7 @@ export class ProcessDetailsComponent implements OnInit {
 
   getOtherDocuments() {
     console.log('ID-Otros documentos:', this.idsOtherDocuments)
-    this.idsOtherDocuments.forEach((otherDocument:any, index) => {
+    this.idsOtherDocuments.forEach((otherDocument: any, index) => {
       const select = [
         "id",
         "title"
@@ -131,32 +131,24 @@ export class ProcessDetailsComponent implements OnInit {
               charge: this.otherDocuments[index].ufCrm32_1638060427910
             }
           )
-          this.updateFieldsOtherDocuments();
-
+          this.updateFieldsOtherDocuments(index);
         },
         'error': error => console.log('Error Listar SPA: ', error),
       })
     });
-
-
   }
 
-  updateFieldsOtherDocuments() {
+  updateFieldsOtherDocuments(position: number) {
     this.b24.spaFieldsForId(189).subscribe({
       'next': (fieldsOtherDocuments: any) => {
         let fieldsLoad: any = [];
         fieldsLoad = fieldsOtherDocuments.result.fields;
-        console.log('Campos de otros documentos: ', this.fieldsOtherDocuments);
-        this.fieldsOtherDocuments.forEach((fieldOtherDocument, index) => {
-          let types = fieldsLoad.ufCrm32_1638059703935.items;
-          console.log('********', types)
-          let finalDispositions = fieldsLoad.ufCrm32_1638059827591.items;
-          let charges = fieldsLoad.ufCrm32_1638060427910.items;
-          fieldOtherDocument.type = types.filter((type: any) => type.ID == fieldOtherDocument.type)[0].VALUE;
-          fieldOtherDocument.finalDispositions = finalDispositions.filter((finalDisposition: any) => finalDisposition.ID == fieldOtherDocument.finalDispositions)[0].VALUE;
-          fieldOtherDocument.charge = charges.filter((charge: any) => charge.ID == fieldOtherDocument.charge)[0].VALUE;
-        });
-
+        let types = fieldsLoad.ufCrm32_1638059703935.items;
+        let finalDispositions = fieldsLoad.ufCrm32_1638059827591.items;
+        let charges = fieldsLoad.ufCrm32_1638060427910.items;
+        this.fieldsOtherDocuments[position].type = types.filter((type: any) => type.ID == this.fieldsOtherDocuments[position].type)[0].VALUE;
+        this.fieldsOtherDocuments[position].finalDispositions = finalDispositions.filter((finalDisposition: any) => finalDisposition.ID == this.fieldsOtherDocuments[position].finalDispositions)[0].VALUE;
+        this.fieldsOtherDocuments[position].charge = charges.filter((charge: any) => charge.ID == this.fieldsOtherDocuments[position].charge)[0].VALUE;
       },
       'error': error => console.log(error)
     })
@@ -165,7 +157,6 @@ export class ProcessDetailsComponent implements OnInit {
   userClick(e: any) {
     const documents = this.documents.filter(document => document.id === e.id)[0];
     this.router.navigate([`/process/document-detail/${documents.title}`], { queryParams: { id: e.id } }).then();
-    console.log(e)
   }
 
   exportExcel(fieldOtherDocument: any) {
