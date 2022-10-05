@@ -140,8 +140,7 @@ export class ProcessDetailsComponent implements OnInit {
   updateFieldsOtherDocuments(position: number) {
     this.b24.spaFieldsForId(189).subscribe({
       'next': (fieldsOtherDocuments: any) => {
-        let fieldsLoad: any = [];
-        fieldsLoad = fieldsOtherDocuments.result.fields;
+        let fieldsLoad = fieldsOtherDocuments.result.fields;
         let types = fieldsLoad.ufCrm32_1638059703935.items;
         let finalDispositions = fieldsLoad.ufCrm32_1638059827591.items;
         let charges = fieldsLoad.ufCrm32_1638060427910.items;
