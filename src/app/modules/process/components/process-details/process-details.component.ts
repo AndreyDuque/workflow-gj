@@ -117,22 +117,23 @@ export class ProcessDetailsComponent implements OnInit {
 
       this.b24.spaFieldContent(189, select, filter).subscribe({
         'next': (otherDocuments: any) => {
-          this.otherDocuments = otherDocuments.result.items;
-          this.fieldsOtherDocuments.push(
-            {
-              id: this.otherDocuments[index].id,
-              name: this.otherDocuments[index].title,
-              type: this.otherDocuments[index].ufCrm32_1638059703935,
-              fileLocation: this.otherDocuments[index].ufCrm32_1638059743150,
-              activeFileTime: this.otherDocuments[index].ufCrm32_1638059755949,
-              inactiveFileLocation: this.otherDocuments[index].ufCrm32_1638059774800,
-              idleFileTime: this.otherDocuments[index].ufCrm32_1638059791256,
-              finalDispositions: this.otherDocuments[index].ufCrm32_1638059827591,
-              charge: this.otherDocuments[index].ufCrm32_1638060427910
-            }
-          )
-          this.updateFieldsOtherDocuments();
-
+          if(otherDocuments){
+            this.otherDocuments = otherDocuments.result.items;
+            this.fieldsOtherDocuments.push(
+              {
+                id: this.otherDocuments[index].id,
+                name: this.otherDocuments[index].title,
+                type: this.otherDocuments[index].ufCrm32_1638059703935,
+                fileLocation: this.otherDocuments[index].ufCrm32_1638059743150,
+                activeFileTime: this.otherDocuments[index].ufCrm32_1638059755949,
+                inactiveFileLocation: this.otherDocuments[index].ufCrm32_1638059774800,
+                idleFileTime: this.otherDocuments[index].ufCrm32_1638059791256,
+                finalDispositions: this.otherDocuments[index].ufCrm32_1638059827591,
+                charge: this.otherDocuments[index].ufCrm32_1638060427910
+              }
+            )
+            this.updateFieldsOtherDocuments();
+          }
         },
         'error': error => console.log('Error Listar SPA: ', error),
       })
@@ -144,22 +145,29 @@ export class ProcessDetailsComponent implements OnInit {
   updateFieldsOtherDocuments() {
     this.b24.spaFieldsForId(189).subscribe({
       'next': (fieldsOtherDocuments: any) => {
-        let fieldsLoad: any = [];
-        fieldsLoad = fieldsOtherDocuments.result.fields;
-        console.log('Campos de otros documentos: ', this.fieldsOtherDocuments);
-        this.fieldsOtherDocuments.forEach((fieldOtherDocument, index) => {
-          let types = fieldsLoad.ufCrm32_1638059703935.items;
-          console.log('********', types)
-          let finalDispositions = fieldsLoad.ufCrm32_1638059827591.items;
-          let charges = fieldsLoad.ufCrm32_1638060427910.items;
-          fieldOtherDocument.type = types.filter((type: any) => type.ID == fieldOtherDocument.type)[0].VALUE;
-          fieldOtherDocument.finalDispositions = finalDispositions.filter((finalDisposition: any) => finalDisposition.ID == fieldOtherDocument.finalDispositions)[0].VALUE;
-          fieldOtherDocument.charge = charges.filter((charge: any) => charge.ID == fieldOtherDocument.charge)[0].VALUE;
-        });
+        if(fieldsOtherDocuments.result){
+          let fieldsLoad: any = [];
+          fieldsLoad = fieldsOtherDocuments.result.fields;
+          console.log('fieldsLoad => ',fieldsLoad)
 
+
+          // this.fieldsOtherDocuments.forEach((fieldOtherDocument, index) => {
+          //   console.log('** fieldOtherDocument ==> ',fieldOtherDocument)
+          //   let types = fieldsLoad.ufCrm32_1638059703935.items;
+          //   let finalDispositions = fieldsLoad.ufCrm32_1638059827591.items;
+          //   let charges = fieldsLoad.ufCrm32_1638060427910.items;
+          //   fieldOtherDocument.type = this.idToValue(types, fieldOtherDocument);
+          //   fieldOtherDocument.finalDispositions = finalDispositions.filter((finalDisposition: any) => finalDisposition.ID == fieldOtherDocument.finalDispositions)[0].VALUE;
+          //   fieldOtherDocument.charge = charges.filter((charge: any) => charge.ID == fieldOtherDocument.charge)[0].VALUE;
+          // });
+        }
       },
       'error': error => console.log(error)
     })
+  }
+
+  idToValue(types: any[], fieldOtherDocument: any ): string{
+    return types.filter((type: {ID: string, VALUE: string}) => type.ID === String(fieldOtherDocument.type))[0].VALUE;
   }
 
   userClick(e: any) {
