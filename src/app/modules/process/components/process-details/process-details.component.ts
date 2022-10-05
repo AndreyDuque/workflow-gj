@@ -20,7 +20,6 @@ export class ProcessDetailsComponent implements OnInit {
   title: string = "";
   documents: any[] = [];
   otherDocuments: any[] = [];
-  otherLeakedDocuments: any[] = [];
   fieldsOtherDocuments: any[] = [];
 
   constructor(
