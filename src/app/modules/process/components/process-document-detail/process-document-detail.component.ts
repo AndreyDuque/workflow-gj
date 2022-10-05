@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { B24Service } from 'src/app/modules/core/services/b24.service';
 
 @Component({
@@ -15,10 +15,12 @@ export class ProcessDocumentDetailComponent implements OnInit {
   processesValues: any[] = [];
   activities: any[] = [];
   updateActivities: any[] = [];
+  title: string = "";
 
   constructor(
     private readonly b24: B24Service,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +29,13 @@ export class ProcessDocumentDetailComponent implements OnInit {
         this.idDocument = Number(query['id']);
       }
     })
+
+    this.route.params.subscribe({
+      'next': param => {
+        this.title = param['title'];
+      }
+    })
+
     this.getDocumentDetails();
   }
 
@@ -95,7 +104,7 @@ export class ProcessDocumentDetailComponent implements OnInit {
             id: activity.result.item.id,
             title: activity.result.item.title,
             description: activity.result.item.ufCrm42_1656011791080,
-            type: "process"
+            type: "activity"
           }
           this.updateActivities.push(cardActivity);
         },
@@ -105,9 +114,8 @@ export class ProcessDocumentDetailComponent implements OnInit {
   }
 
   userClick(e: any) {
-    // const documents = this.documents.filter(document => document.id === e.id)[0];
-    // this.router.navigate([`/process/document-detail/${documents.title}`], { queryParams: { id: e.id } }).then();
-    // console.log(e)
+    const activities = this.updateActivities.filter(activity => activity.id === e.id)[0];
+    this.router.navigate([`/process/activity-detail/${activities.title}`], { queryParams: { id: e.id } }).then();
   }
 
 }

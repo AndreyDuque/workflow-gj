@@ -10,6 +10,14 @@ import { B24Service } from 'src/app/modules/core/services/b24.service';
 export class ListProcessChargesComponent implements OnInit {
 
   chargeProcesses: any[] = [];
+  chargeActivities: any[] = [
+    {
+      id: 2,
+      title: 'Prueba',
+      description: 'Prueba Desarrollo',
+      type: 'process'
+    }
+  ];
   idCharge: number = 0;
   titleCharge: string = "";
 
