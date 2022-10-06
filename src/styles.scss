@@ -7,5 +7,10 @@ body, app-root app-main-layout, app-process-layout {
   flex-direction: column;
   align-content: stretch;
   align-items: stretch;
-  height: 100vh;
+  // height: 100vh;
+  
+}
+
+.footer{
+  bottom: 0%;
 }
