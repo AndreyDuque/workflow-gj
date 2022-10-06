@@ -10,15 +10,10 @@ import { B24Service } from 'src/app/modules/core/services/b24.service';
 export class ListProcessChargesComponent implements OnInit {
 
   chargeProcesses: any[] = [];
-  chargeActivities: any[] = [
-    {
-      id: 2,
-      title: 'Prueba',
-      description: 'Prueba Desarrollo',
-      type: 'process'
-    }
-  ];
+  activityCharges: any[] = [];
+  cardsChargeActivities: any[] = [];
   idCharge: number = 0;
+  idChargeActivity: number = 0;
   titleCharge: string = "";
 
   constructor(
@@ -42,6 +37,7 @@ export class ListProcessChargesComponent implements OnInit {
     })
 
     this.listChargeProcesses();
+    this.getIdChargeActivities();
   }
 
   listChargeProcesses() {
@@ -73,15 +69,66 @@ export class ListProcessChargesComponent implements OnInit {
             }
           )
         });
-        console.log('Resultado Listar SPA: ', this.chargeProcesses);
+      },
+      'error': error => console.log('Error Listar SPA: ', error),
+    })
+  }
+
+  getIdChargeActivities() {
+    this.b24.spaFieldsForId(150).subscribe({
+      'next': (fieldsActivities: any) => {
+        this.activityCharges = fieldsActivities.result.fields.ufCrm42_1656011838994.items.filter(
+          (charge: any) => charge.VALUE == this.titleCharge
+        );
+        this.idChargeActivity = this.activityCharges[0].ID;
+        this.listChargeActivities();
+      },
+      'error': error => console.log(error)
+    })
+  }
+
+  listChargeActivities() {
+    const select = {
+      select: [
+        "id",
+        "title",
+        "ufCrm42_1656011791080",
+        "ufCrm42_1656011838994"
+      ]
+    }
+
+    const filter = {
+      filter: {
+        "ufCrm42_1656011838994": this.idChargeActivity
+      }
+    }
+
+    this.b24.spaFieldContent(150, select, filter).subscribe({
+      'next': (activities: any) => {
+        const getActivities = activities.result.items;
+        getActivities.forEach((activity: any) => {
+          this.cardsChargeActivities.push(
+            {
+              id: activity.id,
+              title: activity.title,
+              description: activity.ufCrm42_1656011791080,
+              type: 'process'
+            }
+          )
+        });
       },
       'error': error => console.log('Error Listar SPA: ', error),
     })
   }
 
   userClick(e: any) {
-    const charge = this.chargeProcesses.filter(charge => charge.id === e.id)[0];
-    this.router.navigate([`/process/process-details/${charge.title}`], {queryParams: {id:e.id}});
-    console.log(charge)
+    const process = this.chargeProcesses.filter(process => process.id === e.id)[0];
+    if (process) {
+      this.router.navigate([`/process/process-details/${process.title}`], { queryParams: { id: e.id } });
+    }
+    const activity = this.cardsChargeActivities.filter(activity => activity.id === e.id)[0];
+    if (activity) {
+      this.router.navigate([`/process/activity-detail/${activity.title}`], { queryParams: { id: activity.id } });
+    }
   }
 }
