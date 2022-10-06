@@ -4,6 +4,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {B24Service} from "./services/b24.service";
 import { CardComponent } from './shared/card/card.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import {ImagesService} from "./services/images.service";
 
 
 @NgModule({
@@ -17,11 +18,12 @@ import { FooterComponent } from './shared/footer/footer.component';
 
   ],
   providers: [
-    B24Service
+    B24Service,
+    ImagesService
   ],
   exports: [
     CardComponent,
-    FooterComponent
+    FooterComponent,
   ]
 })
 export class CoreModule { }

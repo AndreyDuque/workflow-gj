@@ -24,10 +24,11 @@ export class ListProcessChargesComponent implements OnInit {
   constructor(
     private readonly b24: B24Service,
     private readonly route: ActivatedRoute,
-    private readonly router: Router
+    private readonly router: Router,
   ) { }
 
   ngOnInit(): void {
+
     this.route.queryParams.subscribe({
       'next': query => {
         this.idCharge = Number(query['id']);

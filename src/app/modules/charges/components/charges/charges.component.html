@@ -7,7 +7,7 @@
   </section>
 
   <section class="container">
-    <div class="row justify-content-evenly">
+    <div class="row justify-content-evenly" *ngIf="charges">
       <card-charge
         *ngFor="let charge of charges"
         [cardCharge]="charge"

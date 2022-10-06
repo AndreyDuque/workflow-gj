@@ -1,15 +1,29 @@
-img:hover{
-    filter: opacity(.5);
+
+.card-image {
+  display: block;
+  min-height: 325px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card-image:hover {
+  filter: opacity(.5);
+  zoom: 1.10;
+}
+
+.min-height {
+  min-height: 75px;
 }
 
 //media query
 @media only screen and (max-width: 600px) {
 
-.cargos{
+  .cargos {
     width: auto;
     margin-left: 12%;
-}
-.card{
+  }
+  .card {
     margin-top: 10%;
-}
+  }
 }
