@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { B24Service } from 'src/app/modules/core/services/b24.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {B24Service} from 'src/app/modules/core/services/b24.service';
 
 @Component({
   selector: 'process-activity-detail',
@@ -11,11 +11,13 @@ export class ProcessActivityDetailComponent implements OnInit {
 
   idActivity: number = 0;
   activity: any = {};
+  titleActivity :string = '';
 
   constructor(
     private readonly b24: B24Service,
     private readonly route: ActivatedRoute
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe({
@@ -61,10 +63,48 @@ export class ProcessActivityDetailComponent implements OnInit {
         let charge = charges.filter((periodicity: any) => periodicity.ID == this.activity.ufCrm42_1656011838994)[0].VALUE;
         this.activity.ufCrm42_1656011818119 = periodicity;
         this.activity.ufCrm42_1656011838994 = charge;
-        console.log('Periodicidad: ', periodicity)
+        const idDocument = Number(String(this.activity.ufCrm42_1664893390).split('_')[1]);
+        console.log(idDocument);
+        this.getDocumentForId(idDocument);
+          console.log('Periodicidad: ', periodicity)
       },
       'error': error => console.log(error)
     })
   }
 
+  getDocumentForId(documentId: number) {
+    const filter = {
+      filter: {
+        id: documentId
+      }
+    }
+    let document: string = '';
+    this.b24.spaFieldContent(146, filter).subscribe({
+      'next': (fields: any) => {
+        if (fields) {
+          document = fields.result?.items[0]?.title
+          this.activity.ufCrm42_1664893390 = document;
+          console.log('fields 1', fields)
+        }
+      },
+      'error': error => console.log('fields', error)
+    })
+
+    if (document === '') {
+      this.b24.spaFieldContent(189, filter).subscribe({
+        'next': (fields: any) => {
+          if (fields) {
+            document = fields.result?.items[0]?.title
+            this.activity.ufCrm42_1664893390 = document;
+            console.log('fields 2', fields)
+            // document = fields
+          }
+        },
+        'error': error => console.log('fields', error)
+      })
+    }
+  }
+
 }
+
+// TODO: se requiere campo actividades
