@@ -12,6 +12,6 @@ export class ImagesService {
   getImages(){
     const headers = new HttpHeaders()
       .set('Authorization', `Client-ID ${environment.imagesAPIAccessKey}`)
-    return this.http.get<{results: [{urls: {small: string}}]}>(`https://api.unsplash.com/search/photos?page=1&per_page=50&query=office&orientation=portrait`, {headers})
+    return this.http.get<{results: [{urls: {small: string}}]}>(`${environment.imagesAPIUrl}/search/photos?page=1&per_page=50&query=office&orientation=portrait`, {headers})
   }
 }
