@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { B24Service } from 'src/app/modules/core/services/b24.service';
+import {utils, writeFileXLSX} from "xlsx";
 
 @Component({
   selector: 'process-document-detail',
@@ -13,7 +14,6 @@ export class ProcessDocumentDetailComponent implements OnInit {
   documentDetalis: any = {};
   idDocument: number = 0;
   processesValues: any[] = [];
-  activities: any[] = [];
   updateActivities: any[] = [];
   title: string = "";
 
@@ -24,6 +24,8 @@ export class ProcessDocumentDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log('******* ESTOY AQUI  ****************')
+
     this.route.queryParams.subscribe({
       'next': query => {
         this.idDocument = Number(query['id']);
@@ -37,6 +39,7 @@ export class ProcessDocumentDetailComponent implements OnInit {
     })
 
     this.getDocumentDetails();
+
   }
 
   getDocumentDetails() {
@@ -85,12 +88,16 @@ export class ProcessDocumentDetailComponent implements OnInit {
 
       this.b24.spaFieldContent(183, select, filter).subscribe({
         'next': (documents: any) => {
-          const getDocuments = documents.result.items;
-          this.processesValues.push(getDocuments[0]);
-          this.documentDetalis.ufCrm30_1655843438 = this.processesValues;
+          if(documents){
+            const getDocuments = documents.result.items;
+            this.processesValues.push(getDocuments[0]);
+            this.documentDetalis.ufCrm30_1655843438 = this.processesValues;
+          }
+
         },
         'error': error => console.log('Error Listar SPA: ', error),
       })
+
     });
 
   }
@@ -100,13 +107,18 @@ export class ProcessDocumentDetailComponent implements OnInit {
     activities.forEach((activity: any) => {
       this.b24.spaFieldList(150, activity).subscribe({
         'next': (activity: any) => {
-          const cardActivity = {
-            id: activity.result.item.id,
-            title: activity.result.item.title,
-            description: activity.result.item.ufCrm42_1656011791080,
-            type: "activity"
+          if(activity){
+            const cardActivity = {
+              id: activity.result.item.id,
+              title: activity.result.item.title,
+              description: activity.result.item.ufCrm42_1656011791080,
+              type: "activity"
+            }
+            this.updateActivities.push(cardActivity);
+            // this.exportExcel('')
           }
-          this.updateActivities.push(cardActivity);
+
+
         },
         'error': error => console.log('Error Listar SPA: ', error)
       })
@@ -116,6 +128,42 @@ export class ProcessDocumentDetailComponent implements OnInit {
   userClick(e: any) {
     const activities = this.updateActivities.filter(activity => activity.id === e.id)[0];
     this.router.navigate([`/process/activity-detail/${activities.title}`], { queryParams: { id: e.id } }).then();
+  }
+
+  exportExcel(fieldOtherDocument: any) {
+
+    console.log('updateActivities', this.updateActivities);
+    const procesos = this.processesValues.map(process => {
+
+      let newProcess = process
+      delete newProcess.id;
+      return newProcess
+    })
+
+    const actividades = this.updateActivities.map(activity => {
+
+      let newActivity = activity
+      delete newActivity.id;
+      delete newActivity.type;
+      return newActivity
+    })
+
+    const newDocument = {
+      Titulo: this.documentDetalis.title,
+      Objetivo: this.documentDetalis.ufCrm30_1637611597722,
+      Cargo: this.documentDetalis.ufCrm30_1638060318453.VALUE,
+    }
+    console.log('procesos ==> ', procesos)
+    console.log('actividades ==> ', actividades)
+    console.log('newDocument ==> ', newDocument)
+    const ws1 = utils.json_to_sheet([newDocument, procesos, actividades]);
+    const ws2 = utils.json_to_sheet([ procesos ]);
+    const ws3 = utils.json_to_sheet([ , actividades]);
+    const wb = utils.book_new();
+    utils.book_append_sheet(wb, ws1, "Documento 1");
+    utils.book_append_sheet(wb, ws2, "procesos");
+    utils.book_append_sheet(wb, ws3, "actividades");
+    writeFileXLSX(wb, `${this.title}.xlsx`);
   }
 
 }

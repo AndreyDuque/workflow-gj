@@ -11,7 +11,7 @@ import {ImagesService} from "../../../core/services/images.service";
 export class ChargesComponent implements OnInit {
 
   charges: any[] = [];
-  imageList: any[] = [];
+  imageList: string[] = [];
 
   constructor(
     private readonly b24: B24Service,
@@ -52,12 +52,11 @@ export class ChargesComponent implements OnInit {
     let i = 0;
     this.charges.forEach((charge, index) => {
       this.charges[index].image = this.imageList[i]
-      if (i === this.imageList.length) {
+      if (i === this.imageList.length - 1) {
         i = -1;
       }
       i++;
     })
-    console.log(this.charges);
   }
 
   userClick(e: any) {
