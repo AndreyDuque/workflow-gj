@@ -9,9 +9,15 @@ import {B24Service} from 'src/app/modules/core/services/b24.service';
 })
 export class ProcessActivityDetailComponent implements OnInit {
 
+  public config = {
+    printMode: 'template',
+    popupProperties: 'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
+    stylesheets: [{ rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' }],
+
+  }
+
   idActivity: number = 0;
   activity: any = {};
-  titleActivity :string = '';
 
   constructor(
     private readonly b24: B24Service,
@@ -85,24 +91,25 @@ export class ProcessActivityDetailComponent implements OnInit {
           document = fields.result?.items[0]?.title
           this.activity.ufCrm42_1664893390 = document;
           console.log('fields 1', fields)
+          if (!fields.result?.items[0]) {
+            this.b24.spaFieldContent(189, filter).subscribe({
+              'next': (fields: any) => {
+                if (fields) {
+                  document = fields.result?.items[0]?.title
+                  this.activity.ufCrm42_1664893390 = document;
+                  console.log('fields 2', fields)
+                  // document = fields
+                }
+              },
+              'error': error => console.log('fields', error)
+            })
+          }
         }
       },
       'error': error => console.log('fields', error)
     })
 
-    if (document === '') {
-      this.b24.spaFieldContent(189, filter).subscribe({
-        'next': (fields: any) => {
-          if (fields) {
-            document = fields.result?.items[0]?.title
-            this.activity.ufCrm42_1664893390 = document;
-            console.log('fields 2', fields)
-            // document = fields
-          }
-        },
-        'error': error => console.log('fields', error)
-      })
-    }
+
   }
 
 }

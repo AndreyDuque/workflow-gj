@@ -9,6 +9,7 @@ export class FooterComponent implements OnInit {
 
   @Input() footer!:any
   @Output() event:EventEmitter<any>= new EventEmitter()
+  year: number = new Date(Date.now()).getFullYear();
   constructor() { }
 
   ngOnInit(): void {

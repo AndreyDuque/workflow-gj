@@ -1,8 +1,8 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChargesLayoutComponent } from './components/charges-layout/charges-layout.component';
 import { ChargesComponent } from './components/charges/charges.component';
-import { ListProcessChargesComponent } from './components/list-process-charges/list-process-charges.component';
+import { ChargesDetailsComponent } from './components/charges-details/charges-details.component';
 
 const routes: Routes = [
   {
@@ -18,8 +18,8 @@ const routes: Routes = [
     component:ChargesComponent
   },
   {
-    path:'process-list/:title',
-    component:ListProcessChargesComponent
+    path:'charges-details/:title',
+    component:ChargesDetailsComponent
   }]
   }
 ];

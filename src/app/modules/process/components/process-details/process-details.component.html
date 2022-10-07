@@ -1,4 +1,4 @@
-<main class="container-fluid body ">
+<main class="container-fluid body " id="document">
   <div class="row">
     <div class="header pt-5 col-12">
       <h2 class="text-white">{{ title }}</h2>
@@ -79,4 +79,7 @@
       </div>
     </div>
   </section>
+  <div class="mt-4 row d-flex justify-content-center align-content-center my-3">
+    <button [attr.role]="'button'" class="btn btn-outline-primary col-auto" [print]="['document', config]">Print</button>
+  </div>
 </main>

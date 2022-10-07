@@ -3,12 +3,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { B24Service } from 'src/app/modules/core/services/b24.service';
 
 @Component({
-  selector: 'app-list-process-charges',
-  templateUrl: './list-process-charges.component.html',
-  styleUrls: ['./list-process-charges.component.scss']
+  selector: 'app-charges-details',
+  templateUrl: './charges-details.component.html',
+  styleUrls: ['./charges-details.component.scss']
 })
-export class ListProcessChargesComponent implements OnInit {
+export class ChargesDetailsComponent implements OnInit {
 
+  public config = {
+    printMode: 'template',
+    popupProperties: 'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
+    stylesheets: [{ rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' }],
+
+  }
   chargeProcesses: any[] = [];
   activityCharges: any[] = [];
   cardsChargeActivities: any[] = [];

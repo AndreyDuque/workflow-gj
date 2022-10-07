@@ -1,4 +1,4 @@
-<section class="cuerpo container-fluid">
+<section class="cuerpo container-fluid" id="document">
   <div class="row">
     <div class="col-12">
       <h5 class="pb-3 pt-2">{{ titleCharge }}</h5>
@@ -61,5 +61,8 @@
       *ngFor="let activity of cardsChargeActivities"
       [card]="activity"
     ></card>
+  </div>
+  <div class="mt-4 row d-flex justify-content-center align-content-center py-3">
+    <button [attr.role]="'button'" class="btn btn-outline-primary col-auto" [print]="['document', config]">Print</button>
   </div>
 </section>

@@ -6,7 +6,8 @@ import { ChargesComponent } from './components/charges/charges.component';
 import { ChargesLayoutComponent } from './components/charges-layout/charges-layout.component';
 import { CoreModule } from '../core/core.module';
 import { CardChargeComponent } from './components/card-charge/card-charge.component';
-import { ListProcessChargesComponent } from './components/list-process-charges/list-process-charges.component';
+import { ChargesDetailsComponent } from './components/charges-details/charges-details.component';
+import {NgxPrintElementModule} from "ngx-print-element";
 
 
 @NgModule({
@@ -14,12 +15,13 @@ import { ListProcessChargesComponent } from './components/list-process-charges/l
     ChargesComponent,
     ChargesLayoutComponent,
     CardChargeComponent,
-    ListProcessChargesComponent
+    ChargesDetailsComponent
   ],
   imports: [
     CommonModule,
     ChargesRoutingModule,
-    CoreModule
+    CoreModule,
+    NgxPrintElementModule,
   ]
 })
 export class ChargesModule { }

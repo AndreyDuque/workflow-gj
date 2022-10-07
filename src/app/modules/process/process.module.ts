@@ -8,6 +8,7 @@ import { ProcessDetailsComponent } from './components/process-details/process-de
 import { ProcessDocumentDetailComponent } from './components/process-document-detail/process-document-detail.component';
 import { ProcessActivityDetailComponent } from './components/process-activity-detail/process-activity-detail.component';
 import { CoreModule } from '../core/core.module';
+import {NgxPrintElementModule} from "ngx-print-element";
 
 
 
@@ -22,7 +23,8 @@ import { CoreModule } from '../core/core.module';
   imports: [
     CommonModule,
     ProcessRoutingModule,
-    CoreModule
+    CoreModule,
+    NgxPrintElementModule
   ]
 })
 export class ProcessModule { }

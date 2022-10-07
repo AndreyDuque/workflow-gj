@@ -61,7 +61,7 @@ export class ChargesComponent implements OnInit {
 
   userClick(e: any) {
     const charge = this.charges.filter(charge => charge.ID === e.id)[0];
-    this.router.navigate([`/charges/process-list/${charge.VALUE}`], {queryParams: {id:e.id}}).then();
+    this.router.navigate([`/charges/charges-details/${charge.VALUE}`], {queryParams: {id:e.id}}).then();
   }
 
 }

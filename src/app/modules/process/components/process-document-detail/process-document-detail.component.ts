@@ -10,6 +10,12 @@ import {utils, writeFileXLSX} from "xlsx";
 })
 export class ProcessDocumentDetailComponent implements OnInit {
 
+  public config = {
+    printMode: 'template',
+    popupProperties: 'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
+    stylesheets: [{ rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' }],
+
+  }
   processes: any[] = [];
   documentDetalis: any = {};
   idDocument: number = 0;

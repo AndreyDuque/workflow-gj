@@ -8,6 +8,13 @@ import { B24Service } from 'src/app/modules/core/services/b24.service';
   styleUrls: ['./process-list.component.scss']
 })
 export class ProcessListComponent implements OnInit {
+
+  public config = {
+    printMode: 'template',
+    popupProperties: 'toolbar=yes,scrollbars=yes,resizable=yes,top=0,left=0,fullscreen=yes',
+    stylesheets: [{ rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css' }],
+
+  }
   contentCard: any;
   processes: any[] = [];
   // getProcesses: any[] = [];

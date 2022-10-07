@@ -1,4 +1,4 @@
-<section class="cuerpo container-fluid">
+<section class="cuerpo container-fluid" id="document">
 
   <section class="row">
     <div class="header pt-5 col-12">
@@ -48,7 +48,7 @@
       ></card>
     </div>
   </section>
-  <div class="mt-4">
-    <a class="btn btn-outline-primary col-auto border-0" [attr.role]="'button'" (click)="exportExcel(documentDetalis)">Exportar a Excel</a>
+  <div class="mt-4 row d-flex justify-content-center align-content-center my-3">
+    <button [attr.role]="'button'" class="btn btn-outline-primary col-auto" [print]="['document', config]">Print</button>
   </div>
 </section>
